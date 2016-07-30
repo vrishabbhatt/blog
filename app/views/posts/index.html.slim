@@ -1,0 +1,21 @@
+| this is the index page
+br
+| total number of posts
+= @posts.count
+.container
+	- @posts.each do |post|
+		.well
+			.text-center.post-title
+				= post.title
+				br
+				= post.id
+			.text-center.post-body
+				= post.body
+			.row
+				.container
+					.text-center
+						= link_to 'view', post_path(post.id), class: "btn bn-default"
+.container
+	.row
+		.col-sm-4
+			= link_to 'new_post', new_post_path, class: "btn btn-primary"

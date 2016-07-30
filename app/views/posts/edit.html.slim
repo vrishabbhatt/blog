@@ -1,0 +1,26 @@
+.container
+	.row.well
+		= simple_form_for @post do |f|
+		  =f.input :title
+		  br
+		  =f.input :body
+		  br
+		  .row 
+		  	.col-md-6
+		  		= image_tag @post.image.url 
+		  		br
+		  		.btn.btn-primary.show-edit-image
+		  					| Change
+		  	.col-md-6
+		  		.text-center.edit-image.hide
+		  			| hola mes amigos here is where the delete button will be
+		  			/ = simple_form_for @post, url: image_edit_path(id: @post.id) , html: {multipart: true} , method: :post , remote: :true do |f|
+		  			= f.input :image
+		  				/ = f.submit 'change' , class: "btn btn-warning"
+		  .text-center
+		  	=f.submit 'save' , class: "btn btn-success"
+	.container
+		.well
+			.page-reload.btn.btn-success
+				| reload the goddamm page
+				

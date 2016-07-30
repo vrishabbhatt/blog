@@ -1,0 +1,11 @@
+.container
+	.row.well
+		= simple_form_for @post do |f|
+		  =f.input :title
+		  br
+		  =f.input :body
+		  br
+		  = f.input :image
+		  br
+		  .text-center
+		  	=f.submit 'save' , class: "btn btn-success"

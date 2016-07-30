@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<embed src="mammoth.mp3" autostart="true" loop="true" hidden="true"><embed>
+
+<% if !flash[:message].blank? %>
+	<div class="container">
+		<%= flash[:message]%>
+	</div>
+<% end %>
+<%= yield %>
+
+</body>
+</html>

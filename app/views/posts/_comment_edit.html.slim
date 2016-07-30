@@ -1,0 +1,3 @@
+= simple_form_for @comment , url: comment_update_path(comment_id: @comment.id) , :html => { :class => 'form-inline' } do |f|
+					= f.input_field :body , placeholder: "enter a comment..."
+					=f.submit 'post' , class: "btn btn-success"

@@ -1,0 +1,65 @@
+.container
+	.well 
+		h1.text-center
+			= @post.title
+			= @post.comments.count
+		br
+		h5.text-body
+			= @post.body
+		br
+			= image_tag @post.image.url
+		.row
+			.col-sm-6
+				.text-center
+					= link_to 'edit', edit_post_path(id: @post.id) , class: "btn btn-info"
+			.col-sm-6
+				.text-center
+					= link_to 'delete', @post , method: :delete , class: "btn btn-warning"	
+		.row
+			| check
+			- a = root_path
+			= link_to "home" , root_path, class: "btn btn-default"
+	
+	- if @post.comments.count != 0
+		 - @post.comments.all.each do  |comment|
+			.container
+				.text-center
+					.row				
+					 	= comment.body
+					 	/ = link_to 'edit' ,comment_edit_path(comment_id: comment.id),remote: :true, "data-toggle" => "modal", "data-target" => "#my-modal" 
+					 	= link_to 'edit' ,comment_edit_path(comment_id: comment.id) 
+					 	= link_to 'delete', comment_delete_path(id: comment.id) , method: :delete , class: "btn btn-warning"
+					.clearfix	
+					 	#my-modal.modal  title=("My modal")
+							/ .modal-dialog 	
+							/  	.modal-content
+							 		.modal-body.a-unique-class
+							 		/ 	/ = render "comment_edit"
+							 		/ 	= simple_form_for @comment , url: root_path, remote: :true , :html => { :class => 'form-inline' } do |f|
+										/ 	= f.input_field :body , placeholder: "enter a comment..."
+										/ 	=f.submit 'post' , class: "btn btn-success"
+							 		/ button.btn aria-hidden="true" data-dismiss="modal"  Close
+
+				 		br
+	.container
+		.text-center
+			= simple_form_for @comment , url: comment_create_path(post_id: @post.id) , remote: :true , :html => { :class => 'form-inline' } do |f|
+					= f.input_field :body , placeholder: "enter a comment..."
+					=f.submit 'post' , class: "btn btn-success"
+	br
+	.container
+		.text-center
+			- a = root_path
+				= link_to "home" , a , class: "btn btn-default"
+br
+br
+.container
+	.text-center
+		button.btn.btn-lg data-target="#my-modal" data-toggle="modal"  Open a fucking modal
+		#my-modal.modal.fade
+			.modal-dialog
+				.modal-content
+					.modal-body
+						| Bull shit text
+					.modal-footer
+						button.btn data-dismiss="modal" close
